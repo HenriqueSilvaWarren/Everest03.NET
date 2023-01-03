@@ -9,12 +9,11 @@ namespace Everest03.NET.Controllers
     [Route("[controller]")]
     public class CustomersController : ControllerBase
     {
-        private CustomersValidator _validator;
         private CustomersService _service;
-        public CustomersController(CustomersService service, CustomersValidator validator)
+        public CustomersController(CustomersService service)
         {
             _service = service;
-            _validator = validator;
+
         }
 
         [HttpPost(Name = "PostCustomer")]
@@ -24,7 +23,7 @@ namespace Everest03.NET.Controllers
         {
             try
             {
-                var validationResults = _validator.Validate(body);
+            
                 _service.setCustomer(body);
                 return new CreatedResult("Post", "Created customer successfully");
             }

@@ -1,5 +1,6 @@
 ﻿
 using Everest03.NET.Repositories;
+using Everest03.NET.Validators;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 
@@ -9,10 +10,12 @@ namespace Everest03.NET.Services
     {
         private CustomersRepository _repository;
         private List<Customer> _customers;
-        public CustomersService(CustomersRepository repository, List<Customer> customers)
+        private CustomersValidator _validator;
+        public CustomersService(CustomersRepository repository, List<Customer> customers, CustomersValidator validator)
         {
             _customers= customers;
             _repository = repository;
+            _validator= validator;
         }
 
 
@@ -29,7 +32,8 @@ namespace Everest03.NET.Services
 
         public void setCustomer(Customer customer)
         {
-            customer.Cpf = new Regex("[.-]").Replace(customer.Cpf, string.Empty);
+            _validator.Validate(customer);
+            customer.Cpf = new Regex("[.-]").Replace(customer.Cpf, string.Empty)
             EmailAlreadyExists(customer.Email);
             CpfAlreadyExists(customer.Cpf);
             _repository.setCustomer(customer);
@@ -37,6 +41,7 @@ namespace Everest03.NET.Services
 
         public void updateCustomer(long Id, Customer customer)
         {
+            _validator.Validate(customer);
             idExists(Id);
             EmailAlreadyExists(customer.Email, Id);
             CpfAlreadyExists(customer.Cpf, Id);
