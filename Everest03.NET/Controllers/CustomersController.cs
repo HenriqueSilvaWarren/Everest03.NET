@@ -1,5 +1,6 @@
-﻿using Everest03.NET.Validators;
-using Microsoft.AspNetCore.Http;
+﻿using Everest03.NET.Services;
+using Everest03.NET.Validators;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Everest03.NET.Controllers
@@ -9,25 +10,60 @@ namespace Everest03.NET.Controllers
     public class CustomersController : ControllerBase
     {
         private CustomersValidator _validator;
-        private Service _service;
-        public CustomersController(Service service, CustomersValidator validator)
+        private CustomersService _service;
+        public CustomersController(CustomersService service, CustomersValidator validator)
         {
             _service = service;
             _validator = validator;
         }
 
         [HttpPost(Name = "PostCustomer")]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Customers))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Customer))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody] Customers body)
+        public IActionResult Post([FromBody] Customer body)
         {
-            var validationResults = _validator.Validate(body);
-            _service.setCustomers(body);
-            return new CreatedResult("Post", "Created customer successfully");
+            try
+            {
+                var validationResults = _validator.Validate(body);
+                _service.setCustomer(body);
+                return new CreatedResult("Post", "Created customer successfully");
+            }
+            catch(Exception e)
+            {
+                return new BadRequestObjectResult(e.Message);
+            }
+        }
+
+        [HttpDelete(Name = "DeleteCustomer")]
+        public IActionResult Delete([FromQuery] long Id)
+        {
+            try
+            {
+                _service.deleteCustomer(Id);
+                return new OkResult();
+            }
+            catch(Exception e)
+            {
+                return new NotFoundObjectResult(e.Message);
+            }
+        }
+
+        [HttpPut(Name = "PutCustomer")]
+        public IActionResult Put([FromQuery] long Id, [FromBody] Customer customer)
+        {
+            try
+            {
+                _service.updateCustomer(Id, customer);
+                return new OkObjectResult($"Cliente com ID: {Id} atualizado com sucesso!");
+            }
+            catch (Exception e)
+            {
+                return new NotFoundObjectResult(e.Message);
+            }
         }
 
         [HttpGet(Name = "GetCustomers")]
-        public List<Customers> Get()
+        public List<Customer> Get()
         {
             return _service.getCustomers();
         }

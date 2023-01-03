@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Everest03.NET
 {
-    public class Customers
+    public class Customer
     {
         public long Id { get; private set; }
         public string FullName { get; set; }

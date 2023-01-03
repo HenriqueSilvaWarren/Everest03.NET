@@ -3,11 +3,13 @@ using FluentValidation.AspNetCore;
 using System.Reflection;
 using Newtonsoft.Json;
 using Everest03.NET.Validators;
+using Everest03.NET.Services;
+using Everest03.NET.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers()   
+builder.Services.AddControllers()  
      .AddFluentValidation(options =>
      {
          // Validate child properties and root collection elements
@@ -21,8 +23,10 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<Service, Service>();
-builder.Services.AddSingleton<CustomersValidator, CustomersValidator>();
+builder.Services.AddSingleton<CustomersService>();
+builder.Services.AddSingleton<List<Customer>>();
+builder.Services.AddSingleton<CustomersRepository>();
+builder.Services.AddSingleton<CustomersValidator>();
 
 var app = builder.Build();
 
