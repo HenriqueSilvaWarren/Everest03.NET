@@ -1,22 +1,26 @@
-﻿namespace Everest03.NET.Validators
+﻿using FluentValidation;
+using System;
+
+namespace Everest03.NET.Validators
 {
-    using FluentValidation;
+   
+
     public class CustomersValidator : AbstractValidator<Customer>
     {
         public CustomersValidator()
         {
-            RuleFor(customer => customer.FullName).NotNull();
-            RuleFor(customer => customer.Email).NotNull().EmailAddress();
-            RuleFor(customer => customer.EmailConfirmation).NotNull().EmailAddress().Equal(customer => customer.Email);
-            RuleFor(customer => customer.Cpf).NotNull().IsValidCPF();
-            RuleFor(customer => customer.Cellphone).NotNull();
-            RuleFor(customer => customer.DateOfBirth).NotNull();
-            RuleFor(customer => customer.EmailSms).NotNull();
-            RuleFor(customer => customer.Whatsapp).NotNull();
-            RuleFor(customer => customer.Country).NotNull();
-            RuleFor(customer => customer.City).NotNull();
-            RuleFor(customer => customer.PostalCode).NotNull();
-            RuleFor(customer => customer.Address).NotNull();
+            RuleFor(customer => customer.FullName).NotEmpty().MinimumLength(8);
+            RuleFor(customer => customer.Email).NotEmpty().EmailAddress();
+            RuleFor(customer => customer).Must(customer => customer.Email == customer.EmailConfirmation).WithMessage("Email e EmailConfirmation precisam ser iguais");
+            RuleFor(customer => customer.Cpf).NotEmpty().IsValidCPF();
+            RuleFor(customer => customer.Cellphone).NotEmpty().Matches(@"\([0-9]{2}\)[0-9]{5}-[0-9]{4}");
+            RuleFor(customer => customer.DateOfBirth).NotEmpty().LessThanOrEqualTo(DateTime.Now.AddYears(-18));
+            RuleFor(customer => customer.EmailSms).NotEmpty();
+            RuleFor(customer => customer.Whatsapp).NotEmpty();
+            RuleFor(customer => customer.Country).NotEmpty().MinimumLength(4);
+            RuleFor(customer => customer.City).NotEmpty();
+            RuleFor(customer => customer.PostalCode).NotEmpty().Matches(@"[0-9]{5}-[0-9]{3}");
+            RuleFor(customer => customer.Address).NotEmpty().MinimumLength(10);
             RuleFor(customer => customer.Number).NotNull();
         }
     }

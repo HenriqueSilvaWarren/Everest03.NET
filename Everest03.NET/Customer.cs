@@ -1,9 +1,39 @@
-using System.Text.Json.Serialization;
+using System;
 
 namespace Everest03.NET
 {
-    public class Customer
+    public class Customer : WithId
     {
+        public Customer(
+            string fullName,
+            string email,
+            string emailConfirmation,
+            string cpf,
+            string cellphone,
+            DateTime dateOfBirth,
+            bool emailSms,
+            bool whatsapp,
+            string country,
+            string city,
+            string postalCode,
+            string address,
+            int number
+            ) {
+            FullName = fullName;
+            Email = email;
+            EmailConfirmation = emailConfirmation;
+            Cpf = cpf;
+            Cellphone = cellphone;
+            DateOfBirth = dateOfBirth;
+            EmailSms = emailSms;
+            Whatsapp = whatsapp;
+            Country = country;
+            City = city;
+            PostalCode = postalCode;
+            Address = address;
+            Number = number;
+        }
+
         public long Id { get; private set; }
         public string FullName { get; set; }
         public string Email { get; set; }
@@ -19,7 +49,7 @@ namespace Everest03.NET
         public string Address { get; set; }
         public int Number { get; set; }
 
-        public void setId(long id)
+        public void SetId(long id)
         {
             Id = id;
         }

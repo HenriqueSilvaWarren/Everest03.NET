@@ -1,37 +1,40 @@
-﻿namespace Everest03.NET.Repositories
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Everest03.NET.Services
 {
-    public class CustomersRepository
+    public class Service : IService
     {
-        public CustomersRepository(List<Customer> customers) {
+        public Service(List<Customer> customers) {
             _customers= customers;
         }
         private readonly List<Customer> _customers;
 
         private long _id = 0;
 
-        public void setCustomer(Customer customer)
+        public void SetCustomer(Customer customer)
         {
-            customer.setId(++_id);
+            customer.SetId(++_id);
             _customers.Add(customer);
         }
 
-        public List<Customer> getCustomers()
+        public List<Customer> GetCustomers()
         {
             return _customers;
         }
 
-        public Customer getCustomerById(long Id)
+        public Customer GetCustomerById(long Id)
         {
             return _customers.FirstOrDefault(customer => customer.Id == Id)!;
         }
-        public void deleteCustomer(long id)
+        public void DeleteCustomer(long id)
         {
             _customers.RemoveAll(customer => customer.Id == id);
         }
 
-        public void updateCustomer(long Id, Customer customer)
+        public void UpdateCustomer(long Id, Customer customer)
         {
-            customer.setId(Id);
+            customer.SetId(Id);
             var index = _customers.FindIndex(customer => customer.Id == Id);
             _customers[index] = customer;
         }

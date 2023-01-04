@@ -1,6 +1,9 @@
-﻿using Everest03.NET.Services;
+﻿using Everest03.NET.AppServices;
 using Everest03.NET.Validators;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace Everest03.NET.Controllers
 {
@@ -8,9 +11,9 @@ namespace Everest03.NET.Controllers
     [Route("[controller]")]
     public class CustomersController : ControllerBase
     {
-        private CustomersService _service;
+        private AppService _service;
 
-        public CustomersController(CustomersService service)
+        public CustomersController(AppService service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
@@ -22,7 +25,7 @@ namespace Everest03.NET.Controllers
         {
             try
             {
-                _service.setCustomer(body);
+                _service.SetCustomer(body);
                 return new CreatedResult("Post", $"Created customer successfully, ID: {body.Id}");
             }
             catch (Exception e)
@@ -38,7 +41,7 @@ namespace Everest03.NET.Controllers
         {
             try
             {
-                _service.deleteCustomer(Id);
+                _service.DeleteCustomer(Id);
                 return new NoContentResult();
             }
             catch(Exception e)
@@ -50,24 +53,30 @@ namespace Everest03.NET.Controllers
         [HttpPut(Name = "PutCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest   )]
         public IActionResult Put([FromQuery] long Id, [FromBody] Customer customer)
         {
             try
             {
-                _service.updateCustomer(Id, customer);
+                _service.UpdateCustomer(Id, customer);
                 return new OkObjectResult($"Cliente com ID: {Id} atualizado com sucesso!");
+            }
+            catch (ArgumentException e)
+            {
+                return new BadRequestObjectResult(e.Message);
             }
             catch (Exception e)
             {
                 return new NotFoundObjectResult(e.Message);
             }
+         
         }
 
         [HttpGet(Name = "GetCustomers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public List<Customer> Get()
         {
-            return _service.getCustomers();
+            return _service.GetCustomers();
         }
 
         [HttpGet("{Id}",Name = "GetCustomerById")]
@@ -77,7 +86,7 @@ namespace Everest03.NET.Controllers
         {
             try
             {
-                return new OkObjectResult(_service.getCustomerById(Id));
+                return new OkObjectResult(_service.GetCustomerById(Id));
             }
             catch (Exception e)
             {

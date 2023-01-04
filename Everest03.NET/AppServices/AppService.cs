@@ -1,60 +1,57 @@
 ﻿
-using Everest03.NET.Repositories;
+using Everest03.NET.Service;
 using Everest03.NET.Validators;
-using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Everest03.NET.Services
+namespace Everest03.NET.AppServices
 {
-    public class CustomersService
+    public class AppService : IAppService
     {
-        private CustomersRepository _repository;
+        private Service.Service _repository;
         private List<Customer> _customers;
-        private CustomersValidator _validator;
-        public CustomersService(CustomersRepository repository, List<Customer> customers, CustomersValidator validator)
+        public AppService(Service.Service repository, List<Customer> customers)
         {
             _customers= customers;
             _repository = repository;
-            _validator= validator;
         }
 
 
-        public List<Customer> getCustomers()
+        public List<Customer> GetCustomers()
         {
-            return _repository.getCustomers();
+            return _repository.GetCustomers();
         }
 
-        public Customer getCustomerById(long Id)
+        public Customer GetCustomerById(long Id)
         {
-            idExists(Id);
-            return _repository.getCustomerById(Id);
+            IdExists(Id);
+            return _repository.GetCustomerById(Id);
         }
 
-        public void deleteCustomer(long Id)
+        public void DeleteCustomer(long Id)
         {
-            idExists(Id);
-            _repository.deleteCustomer(Id);
+            IdExists(Id);
+            _repository.DeleteCustomer(Id);
         }
 
-        public void setCustomer(Customer customer)
+        public void SetCustomer(Customer customer)
         {
-            _validator.Validate(customer);
             customer.Cpf = new Regex("[.-]").Replace(customer.Cpf, string.Empty);
             EmailAlreadyExists(customer.Email);
             CpfAlreadyExists(customer.Cpf);
-            _repository.setCustomer(customer);
+            _repository.SetCustomer(customer);
         }
 
-        public void updateCustomer(long Id, Customer customer)
+        public void UpdateCustomer(long Id, Customer customer)
         {
-            _validator.Validate(customer);
-            idExists(Id);
+            IdExists(Id);
             EmailAlreadyExists(customer.Email, Id);
             CpfAlreadyExists(customer.Cpf, Id);
-            _repository.updateCustomer(Id, customer);
+            _repository.UpdateCustomer(Id, customer);
         }
 
-        private void EmailAlreadyExists(string email, long Id = 0)
+        public void EmailAlreadyExists(string email, long Id = 0)
         {
             foreach (Customer registeredCustomer in _customers)
             {
@@ -64,12 +61,12 @@ namespace Everest03.NET.Services
                 }
                 if (registeredCustomer.Email == email)
                 {
-                    throw new Exception("Email já existe");
+                    throw new ArgumentException("Email já existe");
                 }
             }
         }
 
-        private void CpfAlreadyExists(string cpf, long Id = 0)
+        public void CpfAlreadyExists(string cpf, long Id = 0)
         {
             foreach (Customer registeredCustomer in _customers)
             {
@@ -79,12 +76,12 @@ namespace Everest03.NET.Services
                 }
                 if (registeredCustomer.Cpf == cpf)
                 {
-                    throw new Exception("Cpf já existe");
+                    throw new ArgumentException("Cpf já existe");
                 }
             }
         }
 
-        private void idExists(long id)
+        public void IdExists(long id)
         {
             foreach (Customer customer in _customers)
             {
