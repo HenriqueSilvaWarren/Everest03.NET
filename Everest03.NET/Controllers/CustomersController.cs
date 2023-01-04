@@ -32,14 +32,14 @@ namespace Everest03.NET.Controllers
         }
 
         [HttpDelete(Name = "DeleteCustomer")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete([FromQuery] long Id)
         {
             try
             {
                 _service.deleteCustomer(Id);
-                return new OkResult();
+                return new NoContentResult();
             }
             catch(Exception e)
             {
