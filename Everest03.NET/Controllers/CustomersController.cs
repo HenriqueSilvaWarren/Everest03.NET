@@ -1,6 +1,5 @@
 ﻿using Everest03.NET.Services;
 using Everest03.NET.Validators;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace Everest03.NET.Controllers
