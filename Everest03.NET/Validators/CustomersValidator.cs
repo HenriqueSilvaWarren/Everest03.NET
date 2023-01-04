@@ -1,6 +1,7 @@
-﻿namespace Everest03.NET.Validators
+using FluentValidation;
+
+namespace Everest03.NET.Validators
 {
-    using FluentValidation;
     public class CustomersValidator : AbstractValidator<Customer>
     {
         public CustomersValidator()
