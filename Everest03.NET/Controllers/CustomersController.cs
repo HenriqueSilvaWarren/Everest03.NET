@@ -12,7 +12,7 @@ namespace Everest03.NET.Controllers
         private CustomersService _service;
         public CustomersController(CustomersService service)
         {
-            _service = service;
+            _service = service ?? throw new ArgumentNullException(nameof(service));
 
         }
 
