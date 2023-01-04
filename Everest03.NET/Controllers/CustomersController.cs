@@ -69,5 +69,20 @@ namespace Everest03.NET.Controllers
         {
             return _service.getCustomers();
         }
+
+        [HttpGet("{Id}",Name = "GetCustomerById")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetById([FromRoute] long Id)
+        {
+            try
+            {
+                return new OkObjectResult(_service.getCustomerById(Id));
+            }
+            catch (Exception e)
+            {
+                return new NotFoundObjectResult(e.Message);
+            }
+        }
     }
 }

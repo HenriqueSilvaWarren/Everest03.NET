@@ -20,6 +20,10 @@
             return _customers;
         }
 
+        public Customer getCustomerById(long Id)
+        {
+            return _customers.FirstOrDefault(customer => customer.Id == Id)!;
+        }
         public void deleteCustomer(long id)
         {
             _customers.RemoveAll(customer => customer.Id == id);

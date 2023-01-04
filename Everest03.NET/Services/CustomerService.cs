@@ -24,6 +24,12 @@ namespace Everest03.NET.Services
             return _repository.getCustomers();
         }
 
+        public Customer getCustomerById(long Id)
+        {
+            idExists(Id);
+            return _repository.getCustomerById(Id);
+        }
+
         public void deleteCustomer(long Id)
         {
             idExists(Id);
