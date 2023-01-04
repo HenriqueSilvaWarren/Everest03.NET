@@ -1,6 +1,5 @@
 ﻿using Everest03.NET.Services;
 using Everest03.NET.Validators;
-
 using Microsoft.AspNetCore.Mvc;
 
 namespace Everest03.NET.Controllers
@@ -10,9 +9,10 @@ namespace Everest03.NET.Controllers
     public class CustomersController : ControllerBase
     {
         private CustomersService _service;
+        
         public CustomersController(CustomersService service)
         {
-            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _service = service;
 
         }
 
