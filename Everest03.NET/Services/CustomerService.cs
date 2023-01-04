@@ -33,7 +33,7 @@ namespace Everest03.NET.Services
         public void setCustomer(Customer customer)
         {
             _validator.Validate(customer);
-            customer.Cpf = new Regex("[.-]").Replace(customer.Cpf, string.Empty)
+            customer.Cpf = new Regex("[.-]").Replace(customer.Cpf, string.Empty);
             EmailAlreadyExists(customer.Email);
             CpfAlreadyExists(customer.Cpf);
             _repository.setCustomer(customer);
