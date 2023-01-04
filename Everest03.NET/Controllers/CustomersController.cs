@@ -9,7 +9,7 @@ namespace Everest03.NET.Controllers
     public class CustomersController : ControllerBase
     {
         private CustomersService _service;
-        
+
         public CustomersController(CustomersService service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
@@ -21,17 +21,19 @@ namespace Everest03.NET.Controllers
         public IActionResult Post([FromBody] Customer body)
         {
             try
-            { 
+            {
                 _service.setCustomer(body);
                 return new CreatedResult("Post", $"Created customer successfully, ID: {body.Id}");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new BadRequestObjectResult(e.Message);
             }
         }
 
         [HttpDelete(Name = "DeleteCustomer")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete([FromQuery] long Id)
         {
             try
@@ -46,6 +48,8 @@ namespace Everest03.NET.Controllers
         }
 
         [HttpPut(Name = "PutCustomer")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Put([FromQuery] long Id, [FromBody] Customer customer)
         {
             try
@@ -60,6 +64,7 @@ namespace Everest03.NET.Controllers
         }
 
         [HttpGet(Name = "GetCustomers")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public List<Customer> Get()
         {
             return _service.getCustomers();
