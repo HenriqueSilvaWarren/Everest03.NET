@@ -21,8 +21,7 @@ namespace Everest03.NET.Controllers
         public IActionResult Post([FromBody] Customer body)
         {
             try
-            {
-            
+            { 
                 _service.setCustomer(body);
                 return new CreatedResult("Post", $"Created customer successfully, ID: {body.Id}");
             }
