@@ -52,7 +52,7 @@ namespace Everest03.NET.Services
             _customers[index] = customer;
         }
 
-        public void EmailAlreadyExists(string email, long Id = 0)
+        private void EmailAlreadyExists(string email, long Id = 0)
         {
             foreach (Customer registeredCustomer in _customers)
             {
@@ -67,7 +67,7 @@ namespace Everest03.NET.Services
             }
         }
 
-        public void CpfAlreadyExists(string cpf, long Id = 0)
+        private void CpfAlreadyExists(string cpf, long Id = 0)
         {
             foreach (Customer registeredCustomer in _customers)
             {
@@ -82,7 +82,7 @@ namespace Everest03.NET.Services
             }
         }
 
-        public void IdExists(long id)
+        private void IdExists(long id)
         {
             foreach (Customer customer in _customers)
             {
