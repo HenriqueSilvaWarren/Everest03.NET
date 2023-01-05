@@ -37,6 +37,7 @@ namespace Everest03.NET.Services
             IdExists(Id);
             return _customers.FirstOrDefault(customer => customer.Id == Id)!;
         }
+        
         public void DeleteCustomer(long id)
         {
             IdExists(id);
