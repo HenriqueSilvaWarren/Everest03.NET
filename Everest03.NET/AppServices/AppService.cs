@@ -1,5 +1,5 @@
 ﻿
-using Everest03.NET.Service;
+using Everest03.NET.Services;
 using Everest03.NET.Validators;
 using System;
 using System.Collections.Generic;
@@ -9,85 +9,37 @@ namespace Everest03.NET.AppServices
 {
     public class AppService : IAppService
     {
-        private Service.Service _repository;
-        private List<Customer> _customers;
-        public AppService(Service.Service repository, List<Customer> customers)
+        private Service _service;
+      
+        public AppService(Service service)
         {
-            _customers= customers;
-            _repository = repository;
+            _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
 
         public List<Customer> GetCustomers()
         {
-            return _repository.GetCustomers();
+            return _service.GetCustomers();
         }
 
         public Customer GetCustomerById(long Id)
         {
-            IdExists(Id);
-            return _repository.GetCustomerById(Id);
+            return _service.GetCustomerById(Id);
         }
 
         public void DeleteCustomer(long Id)
         {
-            IdExists(Id);
-            _repository.DeleteCustomer(Id);
+            _service.DeleteCustomer(Id);
         }
 
-        public void SetCustomer(Customer customer)
+        public Customer SetCustomer(Customer customer)
         {
-            customer.Cpf = new Regex("[.-]").Replace(customer.Cpf, string.Empty);
-            EmailAlreadyExists(customer.Email);
-            CpfAlreadyExists(customer.Cpf);
-            _repository.SetCustomer(customer);
+           return _service.SetCustomer(customer);
         }
 
         public void UpdateCustomer(long Id, Customer customer)
         {
-            IdExists(Id);
-            EmailAlreadyExists(customer.Email, Id);
-            CpfAlreadyExists(customer.Cpf, Id);
-            _repository.UpdateCustomer(Id, customer);
-        }
-
-        public void EmailAlreadyExists(string email, long Id = 0)
-        {
-            foreach (Customer registeredCustomer in _customers)
-            {
-                if(registeredCustomer.Id == Id)
-                {
-                    continue;
-                }
-                if (registeredCustomer.Email == email)
-                {
-                    throw new ArgumentException("Email já existe");
-                }
-            }
-        }
-
-        public void CpfAlreadyExists(string cpf, long Id = 0)
-        {
-            foreach (Customer registeredCustomer in _customers)
-            {
-                if (registeredCustomer.Id == Id)
-                {
-                    continue;
-                }
-                if (registeredCustomer.Cpf == cpf)
-                {
-                    throw new ArgumentException("Cpf já existe");
-                }
-            }
-        }
-
-        public void IdExists(long id)
-        {
-            foreach (Customer customer in _customers)
-            {
-                if (customer.Id == id) return;
-            }
-            throw new Exception($"O id {id} não foi encontrado");
+            _service.UpdateCustomer(Id, customer);
         }
     }
 

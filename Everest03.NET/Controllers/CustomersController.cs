@@ -25,8 +25,8 @@ namespace Everest03.NET.Controllers
         {
             try
             {
-                _service.SetCustomer(body);
-                return new CreatedResult("Post", $"Created customer successfully, ID: {body.Id}");
+                var customer = _service.SetCustomer(body);
+                return new CreatedResult("Post", $"Created customer successfully, ID: {customer.Id}");
             }
             catch (Exception e)
             {
