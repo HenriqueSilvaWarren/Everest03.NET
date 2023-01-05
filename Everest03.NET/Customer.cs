@@ -3,7 +3,7 @@ using System;
 
 namespace Everest03.NET
 {
-    public class Customer : SetId
+    public class Customer : SetterId
     {
         public Customer(
             string fullName,
