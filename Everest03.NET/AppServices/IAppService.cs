@@ -9,6 +9,5 @@ namespace Everest03.NET.AppServices
         void DeleteCustomer(long Id);
         long SetCustomer(Customer customer);
         void UpdateCustomer(long Id, Customer customer);
-      
     }
 }
