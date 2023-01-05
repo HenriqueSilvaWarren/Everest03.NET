@@ -48,6 +48,5 @@ namespace Everest03.NET
         public string PostalCode { get; set; }
         public string Address { get; set; }
         public int Number { get; set; }
-
     }
 }
