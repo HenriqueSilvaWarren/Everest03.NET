@@ -8,6 +8,7 @@ namespace Everest03.NET.Services
     public class Service : IService
     {
         private readonly List<Customer> _customers;
+        
         public Service(List<Customer> customers)
         {
             _customers= customers ?? throw new ArgumentNullException(nameof(customers));
