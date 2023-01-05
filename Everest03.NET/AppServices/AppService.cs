@@ -17,7 +17,6 @@ namespace Everest03.NET.AppServices
             _repository = repository;
         }
 
-
         public List<Customer> GetCustomers()
         {
             return _repository.GetCustomers();
