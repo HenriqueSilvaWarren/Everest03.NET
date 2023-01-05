@@ -7,7 +7,7 @@ namespace Everest03.NET.Services
         void DeleteCustomer(long id);
         Customer GetCustomerById(long Id);
         List<Customer> GetCustomers();
-        Customer SetCustomer(Customer customer);
+        long SetCustomer(Customer customer);
         void UpdateCustomer(long Id, Customer customer);
         void IdExists(long id);
         void EmailAlreadyExists(string email, long Id = 0);

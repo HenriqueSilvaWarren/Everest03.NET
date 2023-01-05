@@ -7,7 +7,7 @@ namespace Everest03.NET.AppServices
         List<Customer> GetCustomers();
         Customer GetCustomerById(long Id);
         void DeleteCustomer(long Id);
-        Customer SetCustomer(Customer customer);
+        long SetCustomer(Customer customer);
         void UpdateCustomer(long Id, Customer customer);
       
     }

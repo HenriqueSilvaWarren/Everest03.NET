@@ -31,9 +31,10 @@ namespace Everest03.NET.AppServices
             _service.DeleteCustomer(Id);
         }
 
-        public Customer SetCustomer(Customer customer)
+        public long SetCustomer(Customer customer)
         {
-           return _service.SetCustomer(customer);
+           _service.SetCustomer(customer);
+           return customer.Id;
         }
 
         public void UpdateCustomer(long Id, Customer customer)

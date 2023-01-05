@@ -15,7 +15,7 @@ namespace Everest03.NET.Services
 
         private long _id = 1;
 
-        public Customer SetCustomer(Customer customer)
+        public long SetCustomer(Customer customer)
         {
             customer.Cpf = new Regex("[.-]").Replace(customer.Cpf, string.Empty);
             EmailAlreadyExists(customer.Email);
@@ -23,7 +23,7 @@ namespace Everest03.NET.Services
             customer.handle(_id);
             _customers.Add(customer);
             _id++;
-            return _customers.Last();
+            return _customers.Last().Id;
         }
 
         public List<Customer> GetCustomers()
