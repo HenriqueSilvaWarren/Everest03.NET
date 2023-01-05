@@ -1,4 +1,3 @@
-﻿
 using Everest03.NET.Service;
 using Everest03.NET.Validators;
 using System;
