@@ -1,5 +1,4 @@
-﻿
-using Everest03.NET.Services;
+using Everest03.NET.Service;
 using Everest03.NET.Validators;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ namespace Everest03.NET.AppServices
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
-
 
         public List<Customer> GetCustomers()
         {
