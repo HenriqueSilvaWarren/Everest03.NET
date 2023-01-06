@@ -7,8 +7,6 @@
   <ItemGroup>
     <PackageReference Include="Extensions.FluentValidation.Br" Version="1.0.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
-    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="7.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 

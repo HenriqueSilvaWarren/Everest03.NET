@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace Everest03.NET.AppServices
+namespace Everest03.NET.Services
 {
-    public interface IAppService
+    public interface ICustomerService
     {
         List<Customer> GetCustomers();
         Customer GetCustomerById(long Id);
-        void DeleteCustomer(long Id);
-        long SetCustomer(Customer customer);
+        void DeleteCustomer(long id);
+        long AddCustomer(Customer customer);
         void UpdateCustomer(long Id, Customer customer);
     }
 }

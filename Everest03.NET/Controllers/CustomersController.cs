@@ -1,5 +1,4 @@
 ﻿using Everest03.NET.AppServices;
-using Everest03.NET.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,11 +10,11 @@ namespace Everest03.NET.Controllers
     [Route("[controller]")]
     public class CustomersController : ControllerBase
     {
-        private AppService _service;
+        private readonly ICustomerAppService _appService;
 
-        public CustomersController(AppService service)
+        public CustomersController(ICustomerAppService appService)
         {
-            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _appService = appService ?? throw new ArgumentNullException(nameof(appService));
         }
 
         [HttpPost(Name = "PostCustomer")]
@@ -25,49 +24,49 @@ namespace Everest03.NET.Controllers
         {
             try
             {
-                var Id = _service.SetCustomer(body);
-                return new CreatedResult("Post", $"Created customer successfully, ID: {Id}");
+                var Id = _appService.AddCustomer(body);
+                return Created("", Id);
             }
             catch (Exception e)
             {
-                return new BadRequestObjectResult(e.Message);
+                return BadRequest(e.Message);
             }
         }
 
-        [HttpDelete(Name = "DeleteCustomer")]
+        [HttpDelete("{Id}",Name = "DeleteCustomer")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Delete([FromQuery] long Id)
+        public IActionResult Delete([FromRoute] long Id)
         {
             try
             {
-                _service.DeleteCustomer(Id);
-                return new NoContentResult();
+                _appService.DeleteCustomer(Id);
+                return NoContent();
             }
             catch(Exception e)
             {
-                return new NotFoundObjectResult(e.Message);
+                return NotFound(e.Message);
             }
         }
 
-        [HttpPut(Name = "PutCustomer")]
+        [HttpPut("{Id}", Name = "PutCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest   )]
-        public IActionResult Put([FromQuery] long Id, [FromBody] Customer customer)
+        public IActionResult Put([FromRoute] long Id, [FromBody] Customer customer)
         {
             try
             {
-                _service.UpdateCustomer(Id, customer);
-                return new OkObjectResult($"Cliente com ID: {Id} atualizado com sucesso!");
+                _appService.UpdateCustomer(Id, customer);
+                return NoContent();
             }
             catch (ArgumentException e)
             {
-                return new BadRequestObjectResult(e.Message);
+                return BadRequest(e.Message);
             }
             catch (Exception e)
             {
-                return new NotFoundObjectResult(e.Message);
+                return NotFound(e.Message);
             }
          
         }
@@ -76,7 +75,7 @@ namespace Everest03.NET.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public List<Customer> Get()
         {
-            return _service.GetCustomers();
+            return _appService.GetCustomers();
         }
 
         [HttpGet("{Id}",Name = "GetCustomerById")]
@@ -86,11 +85,11 @@ namespace Everest03.NET.Controllers
         {
             try
             {
-                return new OkObjectResult(_service.GetCustomerById(Id));
+                return Ok(_appService.GetCustomerById(Id));
             }
             catch (Exception e)
             {
-                return new NotFoundObjectResult(e.Message);
+                return NotFound(e.Message);
             }
         }
     }

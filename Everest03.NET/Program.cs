@@ -3,13 +3,10 @@ using FluentValidation.AspNetCore;
 using Everest03.NET.Validators;
 using Everest03.NET.AppServices;
 using Everest03.NET.Services;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
-using FluentValidation.AspNetCore;
 using FluentValidation;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,10 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IAppService, AppService>();
 builder.Services.AddScoped<IValidator<Customer>, CustomersValidator>();
+builder.Services.AddSingleton<ICustomerService, CustomerService>();   
+builder.Services.AddTransient<ICustomerAppService, CustomerAppService>();
 builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddSingleton<IService, Service>();   
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

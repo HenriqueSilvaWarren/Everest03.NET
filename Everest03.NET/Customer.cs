@@ -1,9 +1,8 @@
-using Everest03.NET.Shared;
 using System;
 
 namespace Everest03.NET
 {
-    public class Customer : SetterId
+    public class Customer 
     {
         public Customer(
             string fullName,
@@ -20,7 +19,7 @@ namespace Everest03.NET
             string address,
             int number
             )
-            {
+        {
             FullName = fullName;
             Email = email;
             EmailConfirmation = emailConfirmation;
@@ -35,11 +34,12 @@ namespace Everest03.NET
             Address = address;
             Number = number;
         }
+        public long Id { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public string EmailConfirmation { get; set; }
         public string Cpf { get; set; }
-        public string Cellphone { get; set;}
+        public string Cellphone { get; set; }
         public DateTime DateOfBirth { get; set; }
         public bool EmailSms { get; set; }
         public bool Whatsapp { get; set; }
