@@ -1,4 +1,4 @@
-﻿using DomainModels;
+﻿using DomainModels.Entities;
 using DomainServices.Interfaces;
 using System;
 using System.Collections.Generic;
