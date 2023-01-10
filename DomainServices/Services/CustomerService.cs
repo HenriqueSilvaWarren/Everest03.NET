@@ -62,7 +62,7 @@ namespace DomainServices.Services
         private void CpfAlreadyExists(string cpf, long Id = 0)
         {
             if (_customers.Any(customer => customer.Cpf == cpf && customer.Id != Id)) 
-            { throw new ArgumentException("Cpf já existe"); }
+             throw new ArgumentException("Cpf já existe");
         }
 
         private void Exists(long id)
