@@ -10,12 +10,12 @@ namespace AppServices.Validators
         {
             RuleFor(customer => customer.FullName)
                 .NotEmpty()
-                .MinimumLength(8);
+                .MinimumLength(6);
 
             RuleFor(customer => customer.Email)
                 .NotEmpty()
                 .EmailAddress()
-                .WithMessage("Email inválido, formato esperado: xxxxx@xxxxx.xxx");
+                .WithMessage("Email invÃ¡lido, formato esperado: xxxxx@xxxxx.xxx");
             
             RuleFor(customer => customer)
                 .Must(customer => customer.Email == customer.EmailConfirmation)
@@ -24,12 +24,12 @@ namespace AppServices.Validators
             RuleFor(customer => customer.Cpf)
                 .NotEmpty()
                 .IsValidCPF()
-                .WithMessage("CPF inválido, formato esperado: 000.000.000-00");
+                .WithMessage("CPF invÃ¡lido, formato esperado: 000.000.000-00");
             
             RuleFor(customer => customer.Cellphone)
                 .NotEmpty()
                 .Matches(@"\([0-9]{2}\)9[0-9]{4}-[0-9]{4}")
-                .WithMessage("Número de Telefone inválido, formato esperado: (00)90000-0000");
+                .WithMessage("NÃºmero de Telefone invÃ¡lido, formato esperado: (00)90000-0000");
 
             RuleFor(customer => customer.DateOfBirth)
                 .NotEmpty()
@@ -51,7 +51,7 @@ namespace AppServices.Validators
             RuleFor(customer => customer.PostalCode)
                 .NotEmpty()
                 .Matches(@"[0-9]{5}-[0-9]{3}")
-                .WithMessage("CEP inválido, formato esperado: 00000-000");
+                .WithMessage("CEP invÃ¡lido, formato esperado: 00000-000");
             
             RuleFor(customer => customer.Address)
                 .NotEmpty()
