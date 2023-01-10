@@ -1,4 +1,4 @@
-using DomainModels;
+using DomainModels.Entities;
 using FluentValidation;
 using System;
 
