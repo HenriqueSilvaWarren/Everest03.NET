@@ -1,7 +1,7 @@
 using AppServices.Interfaces;
 using AppServices.Services;
 using AppServices.Validators;
-using DomainModels;
+using DomainModels.Entities;
 using DomainServices.Interfaces;
 using DomainServices.Services;
 using FluentValidation;

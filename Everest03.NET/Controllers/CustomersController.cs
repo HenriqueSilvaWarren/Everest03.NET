@@ -1,6 +1,5 @@
 using AppServices.Interfaces;
-using DomainModels;
-
+using DomainModels.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
