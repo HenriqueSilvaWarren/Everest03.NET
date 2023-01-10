@@ -1,7 +1,7 @@
 ﻿using DomainModels;
 using System.Collections.Generic;
 
-namespace DomainServices.Services
+namespace DomainServices.Interfaces
 {
     public interface ICustomerService
     {

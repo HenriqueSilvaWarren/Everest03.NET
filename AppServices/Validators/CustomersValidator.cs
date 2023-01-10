@@ -28,8 +28,8 @@ namespace AppServices.Validators
             
             RuleFor(customer => customer.Cellphone)
                 .NotEmpty()
-                .Matches(@"\([0-9]{2}\)[0-9]{5}-[0-9]{4}")
-                .WithMessage("Número de Telefone inválido, formato esperado: (00)00000-0000");
+                .Matches(@"\([0-9]{2}\)9[0-9]{4}-[0-9]{4}")
+                .WithMessage("Número de Telefone inválido, formato esperado: (00)90000-0000");
 
             RuleFor(customer => customer.DateOfBirth)
                 .NotEmpty()
@@ -43,7 +43,7 @@ namespace AppServices.Validators
             
             RuleFor(customer => customer.Country)
                 .NotEmpty()
-                .MinimumLength(4);
+                .MinimumLength(3);
             
             RuleFor(customer => customer.City)
                 .NotEmpty();
@@ -55,7 +55,7 @@ namespace AppServices.Validators
             
             RuleFor(customer => customer.Address)
                 .NotEmpty()
-                .MinimumLength(10);
+                .MinimumLength(3);
             
             RuleFor(customer => customer.Number)
                 .NotNull();

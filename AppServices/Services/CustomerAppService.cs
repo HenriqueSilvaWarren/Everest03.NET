@@ -1,8 +1,10 @@
-
+using AppServices.Interfaces;
 using DomainModels;
-using DomainServices.Services;
+using DomainServices.Interfaces;
+using System;
+using System.Collections.Generic;
 
-namespace AppServices.AppServices
+namespace AppServices.Services
 {
     public class CustomerAppService : ICustomerAppService
     {
@@ -30,13 +32,18 @@ namespace AppServices.AppServices
 
         public long AddCustomer(Customer customer)
         {
-           _service.AddCustomer(customer);
-           return customer.Id;
+            return _service.AddCustomer(customer);
+
         }
 
         public void UpdateCustomer(long Id, Customer customer)
         {
             _service.UpdateCustomer(Id, customer);
+        }
+
+        List<Customer> ICustomerAppService.GetCustomers()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

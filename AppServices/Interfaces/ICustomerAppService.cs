@@ -1,7 +1,7 @@
 ﻿using DomainModels;
 using System.Collections.Generic;
 
-namespace AppServices.AppServices
+namespace AppServices.Interfaces
 {
     public interface ICustomerAppService
     {
