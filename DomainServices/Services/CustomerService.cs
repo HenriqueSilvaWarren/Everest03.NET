@@ -56,13 +56,13 @@ namespace DomainServices.Services
         {
 
             if (_customers.Any(customer => customer.Email == email && customer.Id != Id))
-            { throw new ArgumentException("Email já existe"); }
+             throw new ArgumentException("Email já existe");
         }
 
         private void CpfAlreadyExists(string cpf, long Id = 0)
         {
             if (_customers.Any(customer => customer.Cpf == cpf && customer.Id != Id)) 
-            { throw new ArgumentException("Cpf já existe"); }
+             throw new ArgumentException("Cpf já existe");
         }
 
         private void Exists(long id)
