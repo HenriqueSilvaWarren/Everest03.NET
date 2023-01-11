@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using DomainModels.Entities;
+using System.Collections.Generic;
 
-namespace Everest03.NET.AppServices
+namespace DomainServices.Interfaces
 {
-    public interface ICustomerAppService
+    public interface ICustomerService
     {
         List<Customer> GetCustomers();
         Customer GetCustomerById(long Id);
-        void DeleteCustomer(long Id);
+        void DeleteCustomer(long id);
         long AddCustomer(Customer customer);
         void UpdateCustomer(long Id, Customer customer);
     }

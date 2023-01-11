@@ -1,20 +1,25 @@
-﻿using System;
+﻿using DomainModels.Entities;
+using DomainServices.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Everest03.NET.Services
+namespace DomainServices.Services
 {
     public class CustomerService : ICustomerService
     {
         private readonly List<Customer> _customers = new();
+
         public long AddCustomer(Customer customer)
         {
             customer.Cpf = new Regex("[.-]").Replace(customer.Cpf, string.Empty);
             EmailAlreadyExists(customer.Email);
             CpfAlreadyExists(customer.Cpf);
+
             customer.Id = _customers.Any() ? _customers.LastOrDefault().Id + 1 : 1;
             _customers.Add(customer);
+
             return customer.Id;
         }
 
@@ -40,20 +45,24 @@ namespace Everest03.NET.Services
             Exists(Id);
             EmailAlreadyExists(customer.Email, Id);
             CpfAlreadyExists(customer.Cpf, Id);
+
             customer.Id = Id;
             var index = _customers.FindIndex(customer => customer.Id == Id);
+
             _customers[index] = customer;
         }
 
         private void EmailAlreadyExists(string email, long Id = 0)
         {
 
-            if (_customers.Any(customer => customer.Email == email && customer.Id != Id)) { throw new ArgumentException("Email já existe"); }
+            if (_customers.Any(customer => customer.Email == email && customer.Id != Id))
+             throw new ArgumentException("Email já existe");
         }
 
         private void CpfAlreadyExists(string cpf, long Id = 0)
         {
-            if (_customers.Any(customer => customer.Cpf == cpf && customer.Id != Id)) { throw new ArgumentException("Cpf já existe"); }
+            if (_customers.Any(customer => customer.Cpf == cpf && customer.Id != Id)) 
+             throw new ArgumentException("Cpf já existe");
         }
 
         private void Exists(long id)

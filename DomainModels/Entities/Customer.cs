@@ -1,8 +1,8 @@
 using System;
 
-namespace Everest03.NET
+namespace DomainModels.Entities
 {
-    public class Customer 
+    public class Customer
     {
         public Customer(
             string fullName,

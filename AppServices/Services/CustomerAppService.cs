@@ -1,8 +1,10 @@
-using Everest03.NET.Services;
+using AppServices.Interfaces;
+using DomainModels.Entities;
+using DomainServices.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace Everest03.NET.AppServices
+namespace AppServices.Services
 {
     public class CustomerAppService : ICustomerAppService
     {
@@ -30,8 +32,7 @@ namespace Everest03.NET.AppServices
 
         public long AddCustomer(Customer customer)
         {
-           _service.AddCustomer(customer);
-           return customer.Id;
+            return _service.AddCustomer(customer);
         }
 
         public void UpdateCustomer(long Id, Customer customer)

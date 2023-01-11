@@ -1,10 +1,11 @@
-﻿using Everest03.NET.AppServices;
+using AppServices.Interfaces;
+using DomainModels.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-namespace Everest03.NET.Controllers
+namespace CustomerApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
