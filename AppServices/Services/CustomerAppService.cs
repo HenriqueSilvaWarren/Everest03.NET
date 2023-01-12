@@ -46,5 +46,4 @@ namespace AppServices.Services
             _service.UpdateCustomer(Id, _mapper.Map<Customer>(customer));
         }
     }
-}
-;
+};
