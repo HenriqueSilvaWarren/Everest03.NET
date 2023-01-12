@@ -22,12 +22,14 @@ namespace AppServices.Services
         public List<GetCustomerDto> GetCustomers()
         {
             var customers = _service.GetCustomers();
+
             return _mapper.Map<List<GetCustomerDto>>(customers);
         }
 
         public GetCustomerDto GetCustomerById(long Id)
         {
             var customer = _service.GetCustomerById(Id);
+
             return _mapper.Map<GetCustomerDto>(customer);
         }
 
@@ -36,15 +38,18 @@ namespace AppServices.Services
             _service.DeleteCustomer(Id);
         }
 
-        public long AddCustomer(CreateCustomerDto customer)
+        public long AddCustomer(CreateCustomerDto createCustomer)
         {
-            var mappedCustomer = _mapper.Map<Customer>(customer);
+            var mappedCustomer = _mapper.Map<Customer>(createCustomer);
+
             return _service.AddCustomer(mappedCustomer);
         }
 
-        public void UpdateCustomer(long Id, UpdateCustomerDto customer)
+        public void UpdateCustomer(long Id, UpdateCustomerDto updateCustomer)
         {
-            _service.UpdateCustomer(Id, _mapper.Map<Customer>(customer));
+            var mappedCustomer = _mapper.Map<Customer>(updateCustomer);
+
+            _service.UpdateCustomer(Id, mappedCustomer);
         }
     }
 };

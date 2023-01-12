@@ -22,11 +22,11 @@ namespace CustomerApi.Controllers
         [HttpPost(Name = "PostCustomer")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Customer))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody] CreateCustomerDto body)
+        public IActionResult Post([FromBody] CreateCustomerDto createCustomer)
         {
             try
             {
-                var Id = _appService.AddCustomer(body);
+                var Id = _appService.AddCustomer(createCustomer);
                 return Created("", Id);
             }
             catch (Exception e)
@@ -55,11 +55,11 @@ namespace CustomerApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Put([FromRoute] long Id, [FromBody] UpdateCustomerDto customer)
+        public IActionResult Put([FromRoute] long Id, [FromBody] UpdateCustomerDto updateCustomer)
         {
             try
             {
-                _appService.UpdateCustomer(Id, customer);
+                _appService.UpdateCustomer(Id, updateCustomer);
                 return NoContent();
             }
             catch (ArgumentException e)
