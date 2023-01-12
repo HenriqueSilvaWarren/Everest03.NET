@@ -1,28 +1,33 @@
+using AppServices.Dtos;
 using AppServices.Interfaces;
+using AutoMapper;
 using DomainModels.Entities;
 using DomainServices.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AppServices.Services
 {
     public class CustomerAppService : ICustomerAppService
     {
         private readonly ICustomerService _service;
-      
-        public CustomerAppService(ICustomerService service)
+        private readonly IMapper _mapper;
+        public CustomerAppService(ICustomerService service, IMapper mapper)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public List<Customer> GetCustomers()
+        public List<GetCustomerDto> GetCustomers()
         {
-            return _service.GetCustomers();
+            var customer = _service.GetCustomers().Select(customer => _mapper.Map<GetCustomerDto>(customer)).ToList();
+            return customer;
         }
 
-        public Customer GetCustomerById(long Id)
+        public GetCustomerDto GetCustomerById(long Id)
         {
-            return _service.GetCustomerById(Id);
+            return _mapper.Map<GetCustomerDto>(_service.GetCustomerById(Id));
         }
 
         public void DeleteCustomer(long Id)
@@ -30,14 +35,16 @@ namespace AppServices.Services
             _service.DeleteCustomer(Id);
         }
 
-        public long AddCustomer(Customer customer)
+        public long AddCustomer(CreateCustomerDto customer)
         {
-            return _service.AddCustomer(customer);
+            var mappedCustomer = _mapper.Map<Customer>(customer);
+            return _service.AddCustomer(mappedCustomer);
         }
 
-        public void UpdateCustomer(long Id, Customer customer)
+        public void UpdateCustomer(long Id, UpdateCustomerDto customer)
         {
-            _service.UpdateCustomer(Id, customer);
+            _service.UpdateCustomer(Id, _mapper.Map<Customer>(customer));
         }
     }
 }
+;

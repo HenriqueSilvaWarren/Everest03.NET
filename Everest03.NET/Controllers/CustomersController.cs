@@ -1,3 +1,4 @@
+using AppServices.Dtos;
 using AppServices.Interfaces;
 using DomainModels.Entities;
 using Microsoft.AspNetCore.Http;
@@ -21,7 +22,7 @@ namespace CustomerApi.Controllers
         [HttpPost(Name = "PostCustomer")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Customer))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody] Customer body)
+        public IActionResult Post([FromBody] CreateCustomerDto body)
         {
             try
             {
@@ -53,8 +54,8 @@ namespace CustomerApi.Controllers
         [HttpPut("{Id}", Name = "PutCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest   )]
-        public IActionResult Put([FromRoute] long Id, [FromBody] Customer customer)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Put([FromRoute] long Id, [FromBody] UpdateCustomerDto customer)
         {
             try
             {
@@ -74,7 +75,7 @@ namespace CustomerApi.Controllers
 
         [HttpGet(Name = "GetCustomers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public List<Customer> Get()
+        public List<GetCustomerDto> Get()
         {
             return _appService.GetCustomers();
         }
