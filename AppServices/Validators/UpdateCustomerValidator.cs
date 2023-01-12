@@ -7,7 +7,7 @@ namespace AppServices.Validators
 {
     public class UpdateCustomersValidator : AbstractValidator<UpdateCustomerDto>
     {
-        public UpdateCustomerDto()
+        public UpdateCustomersValidator()
         {
             RuleFor(customer => customer.FullName)
                 .NotEmpty()
