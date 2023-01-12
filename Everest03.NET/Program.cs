@@ -20,11 +20,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddScoped<IValidator<CreateCustomerDto>, CreateCustomersValidator>();
-builder.Services.AddScoped<IValidator<UpdateCustomerDto>, UpdateCustomersValidator>();
 builder.Services.AddSingleton<ICustomerService, CustomerService>();   
 builder.Services.AddTransient<ICustomerAppService, CustomerAppService>();
 builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssembly(Assembly.Load(nameof(AppServices)));
 builder.Services.AddAutoMapper(Assembly.Load(nameof(AppServices)));
 var app = builder.Build();
 
