@@ -27,7 +27,8 @@ namespace AppServices.Services
 
         public GetCustomerDto GetCustomerById(long Id)
         {
-            return _mapper.Map<GetCustomerDto>(_service.GetCustomerById(Id));
+            var customer = _service.GetCustomerById(Id);
+            return _mapper.Map<GetCustomerDto>(customer);
         }
 
         public void DeleteCustomer(long Id)
