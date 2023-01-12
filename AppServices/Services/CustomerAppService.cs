@@ -21,8 +21,8 @@ namespace AppServices.Services
 
         public List<GetCustomerDto> GetCustomers()
         {
-            var customer = _service.GetCustomers().Select(customer => _mapper.Map<GetCustomerDto>(customer)).ToList();
-            return customer;
+            var customers = _service.GetCustomers();
+            return _mapper.Map<List<GetCustomerDto>>(customers);
         }
 
         public GetCustomerDto GetCustomerById(long Id)
