@@ -4,7 +4,6 @@ namespace AppServices.Dtos
 {
     public class UpdateCustomerDto
     {
-   
             public UpdateCustomerDto(
                 string fullName,
                 string email,
