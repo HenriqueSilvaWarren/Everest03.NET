@@ -5,9 +5,9 @@ using System;
 
 namespace AppServices.Validators
 {
-    public class CustomersValidator : AbstractValidator<CreateCustomerDto>
+    public class CreateCustomersValidator : AbstractValidator<CreateCustomerDto>
     {
-        public CustomersValidator()
+        public CreateCustomersValidator()
         {
             RuleFor(customer => customer.FullName)
                 .NotEmpty()
