@@ -1,14 +1,16 @@
-﻿using DomainModels.Entities;
+﻿using AppServices.Dtos;
+using AutoMapper;
+using DomainModels.Entities;
 using System.Collections.Generic;
 
 namespace AppServices.Interfaces
 {
     public interface ICustomerAppService
     {
-        List<Customer> GetCustomers();
-        Customer GetCustomerById(long Id);
+        List<GetCustomer> GetCustomers();
+        GetCustomer GetCustomerById(long Id);
         void DeleteCustomer(long Id);
-        long AddCustomer(Customer customer);
-        void UpdateCustomer(long Id, Customer customer);
+        long AddCustomer(CreateCustomer customer);
+        void UpdateCustomer(long Id, UpdateCustomer customer);
     }
 }

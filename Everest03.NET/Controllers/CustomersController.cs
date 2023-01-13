@@ -1,3 +1,4 @@
+using AppServices.Dtos;
 using AppServices.Interfaces;
 using DomainModels.Entities;
 using Microsoft.AspNetCore.Http;
@@ -21,11 +22,11 @@ namespace CustomerApi.Controllers
         [HttpPost(Name = "PostCustomer")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Customer))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody] Customer body)
+        public IActionResult Post([FromBody] CreateCustomer createCustomer)
         {
             try
             {
-                var Id = _appService.AddCustomer(body);
+                var Id = _appService.AddCustomer(createCustomer);
                 return Created("", Id);
             }
             catch (Exception e)
@@ -53,12 +54,12 @@ namespace CustomerApi.Controllers
         [HttpPut("{Id}", Name = "PutCustomer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest   )]
-        public IActionResult Put([FromRoute] long Id, [FromBody] Customer customer)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Put([FromRoute] long Id, [FromBody] UpdateCustomer updateCustomer)
         {
             try
             {
-                _appService.UpdateCustomer(Id, customer);
+                _appService.UpdateCustomer(Id, updateCustomer);
                 return NoContent();
             }
             catch (ArgumentException e)
@@ -74,7 +75,7 @@ namespace CustomerApi.Controllers
 
         [HttpGet(Name = "GetCustomers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public List<Customer> Get()
+        public List<GetCustomer> Get()
         {
             return _appService.GetCustomers();
         }
