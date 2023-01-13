@@ -1,8 +1,8 @@
 ﻿namespace AppServices.Dtos
 {
-    public class GetCustomerDto
+    public class GetCustomer
     {
-        public GetCustomerDto(
+        public GetCustomer(
            long id,
            string fullName,
            string email,

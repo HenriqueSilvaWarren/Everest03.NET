@@ -2,9 +2,9 @@ using System;
 
 namespace AppServices.Dtos
 {
-    public class CreateCustomerDto
+    public class CreateCustomer
     {
-        public CreateCustomerDto(
+        public CreateCustomer(
             string fullName,
             string email,
             string emailConfirmation,

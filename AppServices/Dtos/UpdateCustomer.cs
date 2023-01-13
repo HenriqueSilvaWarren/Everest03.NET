@@ -2,9 +2,9 @@
 
 namespace AppServices.Dtos
 {
-    public class UpdateCustomerDto
+    public class UpdateCustomer
     {
-            public UpdateCustomerDto(
+            public UpdateCustomer(
                 string fullName,
                 string email,
                 string emailConfirmation,
