@@ -19,18 +19,18 @@ namespace AppServices.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public List<GetCustomerDto> GetCustomers()
+        public List<GetCustomer> GetCustomers()
         {
             var customers = _service.GetCustomers();
 
-            return _mapper.Map<List<GetCustomerDto>>(customers);
+            return _mapper.Map<List<GetCustomer>>(customers);
         }
 
-        public GetCustomerDto GetCustomerById(long Id)
+        public GetCustomer GetCustomerById(long Id)
         {
             var customer = _service.GetCustomerById(Id);
 
-            return _mapper.Map<GetCustomerDto>(customer);
+            return _mapper.Map<GetCustomer>(customer);
         }
 
         public void DeleteCustomer(long Id)
@@ -38,14 +38,14 @@ namespace AppServices.Services
             _service.DeleteCustomer(Id);
         }
 
-        public long AddCustomer(CreateCustomerDto createCustomer)
+        public long AddCustomer(CreateCustomer createCustomer)
         {
             var mappedCustomer = _mapper.Map<Customer>(createCustomer);
 
             return _service.AddCustomer(mappedCustomer);
         }
 
-        public void UpdateCustomer(long Id, UpdateCustomerDto updateCustomer)
+        public void UpdateCustomer(long Id, UpdateCustomer updateCustomer)
         {
             var mappedCustomer = _mapper.Map<Customer>(updateCustomer);
 

@@ -22,7 +22,7 @@ namespace CustomerApi.Controllers
         [HttpPost(Name = "PostCustomer")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Customer))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody] CreateCustomerDto createCustomer)
+        public IActionResult Post([FromBody] CreateCustomer createCustomer)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace CustomerApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Put([FromRoute] long Id, [FromBody] UpdateCustomerDto updateCustomer)
+        public IActionResult Put([FromRoute] long Id, [FromBody] UpdateCustomer updateCustomer)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace CustomerApi.Controllers
 
         [HttpGet(Name = "GetCustomers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public List<GetCustomerDto> Get()
+        public List<GetCustomer> Get()
         {
             return _appService.GetCustomers();
         }

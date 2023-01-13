@@ -5,7 +5,7 @@ using System;
 
 namespace AppServices.Validators
 {
-    public class UpdateCustomersValidator : AbstractValidator<UpdateCustomerDto>
+    public class UpdateCustomersValidator : AbstractValidator<UpdateCustomer>
     {
         public UpdateCustomersValidator()
         {

@@ -7,10 +7,10 @@ namespace AppServices.Interfaces
 {
     public interface ICustomerAppService
     {
-        List<GetCustomerDto> GetCustomers();
-        GetCustomerDto GetCustomerById(long Id);
+        List<GetCustomer> GetCustomers();
+        GetCustomer GetCustomerById(long Id);
         void DeleteCustomer(long Id);
-        long AddCustomer(CreateCustomerDto customer);
-        void UpdateCustomer(long Id, UpdateCustomerDto customer);
+        long AddCustomer(CreateCustomer customer);
+        void UpdateCustomer(long Id, UpdateCustomer customer);
     }
 }
